@@ -17,7 +17,7 @@ export const Pagination = ({
   pageLimit,
   channelsLimit,
 }: PaginationPropsType) => {
-  const { dataLength } = useContext(GlobalContext);
+  const { dataLength, resultsLength } = useContext(GlobalContext);
   const [pages, setPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [paginationGroup, setPaginationGroup] = useState<number[]>([]);
@@ -41,24 +41,23 @@ export const Pagination = ({
     return channels.slice(startIndex, endIndex);
   };
 
-  const getPaginationGroup = () => {
-    const start = Math.floor((currentPage - 1) / pageLimit) * pageLimit;
-    const array = Array(pages)
-      .fill("")
-      .map((_, idx) => start + idx + 1);
-    console.log(array);
-    setPaginationGroup(array);
-  };
-
   useEffect(() => {
     setPages(Math.ceil(dataLength / channelsLimit));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dataLength]);
 
   useEffect(() => {
     getPaginationGroup();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pages]);
+
+  const getPaginationGroup = () => {
+    const start = Math.floor((currentPage - 1) / pageLimit) * pageLimit;
+    const array = Array(pages)
+      .fill("")
+      .map((_, idx) => start + idx + 1);
+    setPaginationGroup(array);
+  };
 
   return (
     <StyledPagination>
@@ -75,11 +74,13 @@ export const Pagination = ({
         <button onClick={goToNextPage} disabled={currentPage === pages}>
           NEXT
         </button>
-        {paginationGroup.map((item, index) => (
-          <button key={index} onClick={changePage}>
-            <span>{item}</span>
-          </button>
-        ))}
+        {/* NOTE: couldn't work out in a reaosnable timeframe how to get pagination numbers to dynamically change. */}
+        {!resultsLength &&
+          paginationGroup.map((number, index) => (
+            <button key={index} onClick={changePage}>
+              {number}
+            </button>
+          ))}
       </div>
     </StyledPagination>
   );

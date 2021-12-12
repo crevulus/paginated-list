@@ -1,18 +1,17 @@
 // NOTE: Context technically wasn't needed here, but makes it easier for me.
-import { createContext } from "react";
+import { createContext, Dispatch, SetStateAction } from "react";
 import { ChannelType } from "./types";
 
 type GlobalContextType = {
   data: ChannelType[];
   dataLength: number;
-};
-
-const initialState = {
-  data: [],
-  dataLength: 0,
+  results: ChannelType[];
+  setResults: Dispatch<SetStateAction<ChannelType[]>>;
+  resultsLength: number;
+  setResultsLength: Dispatch<SetStateAction<number>>;
 };
 
 // NOTE: Would split contexts in a real world application
-const GlobalContext = createContext<GlobalContextType>(initialState);
+const GlobalContext = createContext<GlobalContextType>({} as GlobalContextType);
 
 export default GlobalContext;
