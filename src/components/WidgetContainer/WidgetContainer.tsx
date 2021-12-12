@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import GlobalContext from "../../data/GlobalContext";
 import { ChannelType } from "../../data/types";
-import Checkbox from "../Checkbox/Checkbox";
+import { Pagination } from "../Pagination/Pagination";
 
 const WidgetContainer = () => {
   const [data, setData] = useState<ChannelType[]>([]);
@@ -25,15 +25,7 @@ const WidgetContainer = () => {
 
   return (
     <Provider value={{ data, dataLength }}>
-      <ul>
-        {data &&
-          data.map((channel) => (
-            <li key={channel.key}>
-              <Checkbox label={channel.label} id={channel.key} />
-              <p>{channel.country}</p>
-            </li>
-          ))}
-      </ul>
+      <Pagination channels={data} channelsLimit={15} pageLimit={5} />
       {error && <p>{error}</p>}
     </Provider>
   );
