@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -19,6 +19,15 @@ const GlobalStyle = createGlobalStyle`
     text-align: center;
     padding: 1rem;
   }
+`;
+
+// NOTE: usually would put this in atoms folder but seemed like overkill for just one atom
+export const Button = styled.button`
+  background-color: ${(props) => props.theme.magenta};
+  border: none;
+  border-radius: 50px;
+  padding: 0.5rem 1rem;
+  color: white;
 `;
 
 export default GlobalStyle;

@@ -68,16 +68,16 @@ export const Pagination = ({
         <button onClick={goToPreviousPage} disabled={currentPage === 1}>
           PREV
         </button>
-        <button onClick={goToNextPage} disabled={currentPage === pages}>
-          NEXT
-        </button>
-        {/* NOTE: couldn't work out in a reaosnable timeframe how to get pagination numbers to dynamically change. */}
+        {/* IMPROVE: couldn't work out in a reaosnable timeframe how to get pagination numbers to dynamically change. */}
         {!resultsLength &&
           paginationGroup.map((number, index) => (
             <button key={index} onClick={changePage}>
               {number}
             </button>
           ))}
+        <button onClick={goToNextPage} disabled={currentPage === pages}>
+          NEXT
+        </button>
       </div>
     </StyledPagination>
   );

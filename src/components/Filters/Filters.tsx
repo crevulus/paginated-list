@@ -1,7 +1,7 @@
 import React, { FormEvent, useContext, useState, useRef } from "react";
 import GlobalContext from "../../data/GlobalContext";
 import { ChannelType, FilterCountryOptions } from "../../data/types";
-import { StyledFilters } from "./Filters.styles";
+import { StyledFilters, StyledResetButton } from "./Filters.styles";
 
 export const Filters = () => {
   const [input, setInput] = useState("");
@@ -70,7 +70,7 @@ export const Filters = () => {
           {FilterCountryOptions.Three}
         </option>
       </select>
-      <button onClick={handleReset}>Reset Filters</button>
+      <StyledResetButton onClick={handleReset}>Reset Filters</StyledResetButton>
       {selected.length > 0 && <span>{selected.length} selected</span>}
     </StyledFilters>
   );

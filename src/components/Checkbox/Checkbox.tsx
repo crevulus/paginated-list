@@ -8,13 +8,15 @@ import {
 
 type CheckboxPropsType = {
   label: string;
+  country: string;
   id: string;
 };
 
-const Checkbox = ({ label, id }: CheckboxPropsType) => {
+const Checkbox = ({ label, country, id }: CheckboxPropsType) => {
   const { selected, setSelected } = useContext(GlobalContext);
 
   const handleCheckboxChange = (event: ChangeEvent) => {
+    event.stopPropagation();
     const target = (event.target as HTMLInputElement).value;
     const shallowArrayCopy = [...selected];
     if (shallowArrayCopy.includes(target)) {
@@ -34,7 +36,9 @@ const Checkbox = ({ label, id }: CheckboxPropsType) => {
         value={id}
         onChange={handleCheckboxChange}
       />
-      <StyledLabel htmlFor={id}>{label}</StyledLabel>
+      <StyledLabel htmlFor={id}>
+        {label}, {country}
+      </StyledLabel>
     </StyledCheckboxContainer>
   );
 };
