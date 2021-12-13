@@ -9,6 +9,8 @@ type GlobalContextType = {
   setResults: Dispatch<SetStateAction<ChannelType[]>>;
   resultsLength: number;
   setResultsLength: Dispatch<SetStateAction<number>>;
+  selected: string[];
+  setSelected: Dispatch<SetStateAction<string[]>>;
 };
 
 // NOTE: Would split contexts in a real world application

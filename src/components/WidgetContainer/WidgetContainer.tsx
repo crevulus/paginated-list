@@ -7,6 +7,7 @@ import { Pagination } from "../Pagination/Pagination";
 const WidgetContainer = () => {
   const [data, setData] = useState<ChannelType[]>([]);
   const [results, setResults] = useState<ChannelType[]>([]);
+  const [selected, setSelected] = useState<string[]>([]);
   const [dataLength, setDataLength] = useState(0);
   const [resultsLength, setResultsLength] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
@@ -19,8 +20,18 @@ const WidgetContainer = () => {
         .then((response) => response.json())
         .catch((error) => setError(error.message));
       if (channelData) {
-        setDataLength(channelData.channelList.length);
-        setData(channelData.channelList);
+        // NOTE: Added trust score because that's what I'd wanna see, could also do revenue in last x months.
+        const dataWithScores = channelData.channelList.map(
+          (item: ChannelType) => {
+            return {
+              ...item,
+              trustScore: Math.round(Math.random() * 100),
+              recentRevenue: Math.round(Math.random() * 10000 * Math.random()),
+            };
+          }
+        );
+        setDataLength(dataWithScores.length);
+        setData(dataWithScores);
         setIsLoading(false);
       } else {
         setError("Something went wrong, please try again.");
@@ -41,6 +52,8 @@ const WidgetContainer = () => {
         setResults,
         resultsLength,
         setResultsLength,
+        selected,
+        setSelected,
       }}
     >
       <Filters />
@@ -49,8 +62,7 @@ const WidgetContainer = () => {
       ) : (
         <Pagination
           channels={resultsLength === 0 ? data : results}
-          channelsLimit={10}
-          pageLimit={5}
+          channelsLimit={15}
         />
       )}
       {error && <p>{error}</p>}

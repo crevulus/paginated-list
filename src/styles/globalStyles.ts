@@ -17,6 +17,7 @@ const GlobalStyle = createGlobalStyle`
 
   .App {
     text-align: center;
+    padding: 1rem;
   }
 `;
 

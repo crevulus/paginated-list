@@ -2,11 +2,10 @@ import React, { useContext, useEffect, useState } from "react";
 import GlobalContext from "../../data/GlobalContext";
 import { ChannelType } from "../../data/types";
 import { Card } from "../Card/Card";
-import { StyledPagination } from "./Pagination.styles";
+import { StyledList, StyledPagination } from "./Pagination.styles";
 
 type PaginationPropsType = {
   channels: ChannelType[];
-  pageLimit: number;
   channelsLimit: number;
 };
 
@@ -14,7 +13,6 @@ type PaginationPropsType = {
 // TODO: disable buttons when on that page
 export const Pagination = ({
   channels,
-  pageLimit,
   channelsLimit,
 }: PaginationPropsType) => {
   const { dataLength, resultsLength } = useContext(GlobalContext);
@@ -52,21 +50,20 @@ export const Pagination = ({
   }, [pages]);
 
   const getPaginationGroup = () => {
-    const start = Math.floor((currentPage - 1) / pageLimit) * pageLimit;
     const array = Array(pages)
       .fill("")
-      .map((_, idx) => start + idx + 1);
+      .map((_, idx) => idx + 1);
     setPaginationGroup(array);
   };
 
   return (
     <StyledPagination>
-      <ul>
+      <StyledList>
         {channels &&
           getPaginatedData().map((channel, idx) => (
             <Card channel={channel} key={idx} />
           ))}
-      </ul>
+      </StyledList>
       <div>
         <button onClick={goToPreviousPage} disabled={currentPage === 1}>
           PREV

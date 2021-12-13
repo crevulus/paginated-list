@@ -6,7 +6,8 @@ import { StyledFilters } from "./Filters.styles";
 export const Filters = () => {
   const [input, setInput] = useState("");
   const dropdownRef = useRef<HTMLSelectElement>(null);
-  const { data, setResults, setResultsLength } = useContext(GlobalContext);
+  const { data, setResults, setResultsLength, selected } =
+    useContext(GlobalContext);
 
   const handleSearch = (event: FormEvent) => {
     event.preventDefault();
@@ -69,7 +70,8 @@ export const Filters = () => {
           {FilterCountryOptions.Three}
         </option>
       </select>
-      <button onClick={handleReset}>Reset</button>
+      <button onClick={handleReset}>Reset Filters</button>
+      {selected.length > 0 && <span>{selected.length} selected</span>}
     </StyledFilters>
   );
 };
