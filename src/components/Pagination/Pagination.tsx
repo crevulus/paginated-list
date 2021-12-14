@@ -1,8 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import GlobalContext from "../../data/GlobalContext";
 import { ChannelType } from "../../data/types";
+import { theme } from "../../styles/theme";
 import { Card } from "../Card/Card";
-import { StyledList, StyledPagination } from "./Pagination.styles";
+import {
+  StyledList,
+  StyledNavigationButton,
+  StyledNumberButton,
+  StyledPagination,
+} from "./Pagination.styles";
 
 type PaginationPropsType = {
   channels: ChannelType[];
@@ -65,19 +71,30 @@ export const Pagination = ({
           ))}
       </StyledList>
       <div>
-        <button onClick={goToPreviousPage} disabled={currentPage === 1}>
+        <StyledNavigationButton
+          onClick={goToPreviousPage}
+          disabled={currentPage === 1}
+        >
           PREV
-        </button>
+        </StyledNavigationButton>
         {/* IMPROVE: couldn't work out in a reaosnable timeframe how to get pagination numbers to dynamically change. */}
         {!resultsLength &&
           paginationGroup.map((number, index) => (
-            <button key={index} onClick={changePage}>
+            <StyledNumberButton
+              key={index}
+              onClick={changePage}
+              disabled={number === currentPage}
+              $bgColor={theme.blue}
+            >
               {number}
-            </button>
+            </StyledNumberButton>
           ))}
-        <button onClick={goToNextPage} disabled={currentPage === pages}>
+        <StyledNavigationButton
+          onClick={goToNextPage}
+          disabled={currentPage === pages}
+        >
           NEXT
-        </button>
+        </StyledNavigationButton>
       </div>
     </StyledPagination>
   );

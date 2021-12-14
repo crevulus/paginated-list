@@ -1,7 +1,16 @@
 import React, { FormEvent, useContext, useState, useRef } from "react";
 import GlobalContext from "../../data/GlobalContext";
 import { ChannelType, FilterCountryOptions } from "../../data/types";
-import { StyledFilters, StyledResetButton } from "./Filters.styles";
+import { theme } from "../../styles/theme";
+import {
+  StyledDropdown,
+  StyledFilters,
+  StyledResetButton,
+  StyledSearchButton,
+  StyledSearchForm,
+  StyledSearchInput,
+  StyledSelectedCount,
+} from "./Filters.styles";
 
 export const Filters = () => {
   const [input, setInput] = useState("");
@@ -46,16 +55,18 @@ export const Filters = () => {
 
   return (
     <StyledFilters>
-      <form onSubmit={handleSearch}>
-        <input
+      <StyledSearchForm onSubmit={handleSearch}>
+        <StyledSearchInput
           type="text"
           placeholder="Search for channels e.g. Google"
           value={input}
           onChange={(event) => setInput(event.target.value.toLowerCase())}
         />
-        <button type="submit">Search</button>
-      </form>
-      <select ref={dropdownRef} onChange={handleDropdown}>
+        <StyledSearchButton type="submit" $bgColor={theme.blue}>
+          Search
+        </StyledSearchButton>
+      </StyledSearchForm>
+      <StyledDropdown ref={dropdownRef} onChange={handleDropdown}>
         <option value="default">All countries</option>
         <option id={FilterCountryOptions.One} value={FilterCountryOptions.One}>
           {FilterCountryOptions.One}
@@ -69,9 +80,11 @@ export const Filters = () => {
         >
           {FilterCountryOptions.Three}
         </option>
-      </select>
+      </StyledDropdown>
       <StyledResetButton onClick={handleReset}>Reset Filters</StyledResetButton>
-      {selected.length > 0 && <span>{selected.length} selected</span>}
+      {selected.length > 0 && (
+        <StyledSelectedCount>{selected.length} selected</StyledSelectedCount>
+      )}
     </StyledFilters>
   );
 };

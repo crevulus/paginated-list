@@ -16,18 +16,32 @@ const GlobalStyle = createGlobalStyle`
   }
 
   .App {
+    height: 100vh;
     text-align: center;
-    padding: 1rem;
+    padding: 0 1rem;
+    background-color: #F7F7F8;
   }
 `;
 
 // NOTE: usually would put this in atoms folder but seemed like overkill for just one atom
-export const Button = styled.button`
-  background-color: ${(props) => props.theme.magenta};
+// NOTE: would normll use a package for a more satisfying darkening effect, as well as other animations
+export const Button = styled.button<{ $bgColor?: string }>`
+  background-color: ${(props) => props.$bgColor ?? props.theme.magenta};
   border: none;
-  border-radius: 50px;
+  border-radius: 5px;
   padding: 0.5rem 1rem;
   color: white;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s;
+  &:hover {
+    filter: brightness(110%);
+  }
+  &:disabled {
+    background-color: ${(props) => props.theme.lightGrey};
+    cursor: not-allowed;
+    filter: none;
+  }
 `;
 
 export default GlobalStyle;

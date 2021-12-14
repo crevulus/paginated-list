@@ -3,8 +3,8 @@ export const theme = {
   magenta: "#E23D8E",
   yellow: "#F9C438",
   blue: "#219DD7",
-  highColor: "green",
-  lowColor: "red",
+  lowColor: "ED6A5A",
+  highColor: "629677",
   fontSizeSmall: "1.4rem",
   fontSizeLarge: "2rem",
 };

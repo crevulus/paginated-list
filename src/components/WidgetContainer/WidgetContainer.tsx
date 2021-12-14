@@ -3,6 +3,7 @@ import GlobalContext from "../../data/GlobalContext";
 import { ChannelType } from "../../data/types";
 import { Filters } from "../Filters/Filters";
 import { Pagination } from "../Pagination/Pagination";
+import { StyledWidgetContainer } from "./WidgetContainer.styles";
 
 const WidgetContainer = () => {
   const [data, setData] = useState<ChannelType[]>([]);
@@ -56,16 +57,18 @@ const WidgetContainer = () => {
         setSelected,
       }}
     >
-      <Filters />
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : (
-        <Pagination
-          channels={resultsLength === 0 ? data : results}
-          channelsLimit={15}
-        />
-      )}
-      {error && <p>{error}</p>}
+      <StyledWidgetContainer>
+        <Filters />
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : (
+          <Pagination
+            channels={resultsLength === 0 ? data : results}
+            channelsLimit={15}
+          />
+        )}
+        {error && <p>{error}</p>}
+      </StyledWidgetContainer>
     </Provider>
   );
 };

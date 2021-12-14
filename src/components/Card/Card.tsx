@@ -3,11 +3,11 @@ import { ChannelType } from "../../data/types";
 import Checkbox from "../Checkbox/Checkbox";
 import {
   StyledCard,
-  StyledScores,
   StyledTrustScore,
   StyledRecentRevenue,
   StyledBasicInfo,
   StyledExpandedInfo,
+  StyledCaretIcon,
 } from "./Card.styles";
 
 type CardPropsType = {
@@ -25,14 +25,13 @@ export const Card = ({ channel }: CardPropsType) => {
           country={channel.country}
           id={channel.key}
         />
-        <StyledScores>
-          <StyledRecentRevenue $value={channel.recentRevenue}>
-            $ {channel.recentRevenue}
-          </StyledRecentRevenue>
-          <StyledTrustScore $value={channel.trustScore}>
-            {channel.trustScore}%
-          </StyledTrustScore>{" "}
-        </StyledScores>
+        <StyledRecentRevenue $value={channel.recentRevenue}>
+          $ {channel.recentRevenue}
+        </StyledRecentRevenue>
+        <StyledTrustScore $value={channel.trustScore}>
+          {channel.trustScore}%
+        </StyledTrustScore>{" "}
+        <StyledCaretIcon $isExpanded={isExpanded} />
       </StyledBasicInfo>
       {isExpanded && (
         <StyledExpandedInfo>
