@@ -24,7 +24,6 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 // NOTE: usually would put this in atoms folder but seemed like overkill for just one atom
-// NOTE: would normll use a package for a more satisfying darkening effect, as well as other animations
 export const Button = styled.button<{ $bgColor?: string }>`
   background-color: ${(props) => props.$bgColor ?? props.theme.magenta};
   border: none;

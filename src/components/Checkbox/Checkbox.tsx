@@ -4,6 +4,7 @@ import {
   StyledCheckbox,
   StyledLabel,
   StyledCheckboxContainer,
+  StyledLogo,
 } from "./Checkbox.styles";
 
 type CheckboxPropsType = {
@@ -16,7 +17,7 @@ const Checkbox = ({ label, country, id }: CheckboxPropsType) => {
   const { selected, setSelected } = useContext(GlobalContext);
 
   const handleCheckboxChange = (event: ChangeEvent) => {
-    event.stopPropagation();
+    event.stopPropagation(); // IMPROVE: Glitch; propagation not stopping successfully
     const target = (event.target as HTMLInputElement).value;
     const shallowArrayCopy = [...selected];
     if (shallowArrayCopy.includes(target)) {
@@ -36,6 +37,7 @@ const Checkbox = ({ label, country, id }: CheckboxPropsType) => {
         value={id}
         onChange={handleCheckboxChange}
       />
+      <StyledLogo />
       <StyledLabel htmlFor={id}>
         {label}, {country}
       </StyledLabel>

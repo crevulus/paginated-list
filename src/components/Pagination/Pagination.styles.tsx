@@ -13,9 +13,10 @@ export const StyledNavigationButton = styled(Button)`
   margin: 0 1rem;
 `;
 
+// NOTE: Hardcoded width to match the widest button when dimesnions were fully dynamic.
 export const StyledNumberButton = styled(Button)<{ disabled: boolean }>`
   padding: 0.5rem;
-  width: 1.8rem;
+  width: 2rem;
   &:hover {
     ${(props) => !props.disabled && "transform: translateY(-5px)"};
   }

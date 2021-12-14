@@ -3,9 +3,7 @@ import WidgetContainer from "./components/WidgetContainer/WidgetContainer";
 import GlobalStyle from "./styles/globalStyles";
 import { theme } from "./styles/theme";
 
-// TODO: Rating, favourite, revenue
-// TODO: Remove all selected
-
+// IMPROVE: Remove all selected
 // NOTE: add Container for widget to keep App clean for Auth, Routing etc
 // NOTE: would usually follow atomic structure, but not any resuable atoms in this widget.
 function App() {

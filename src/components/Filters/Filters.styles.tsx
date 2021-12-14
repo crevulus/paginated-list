@@ -7,7 +7,6 @@ export const StyledFilters = styled.div`
   grid-template-columns: 40% repeat(3, 1fr);
   gap: 1rem;
   align-items: center;
-  jutify-content: space-around;
   justify-items: left;
 `;
 

@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { calcColorBoundary } from "../../styles/theme";
 import { ReactComponent as CaretIcon } from "../../assets/caret-icon.svg";
 
 export const StyledCard = styled.li`
@@ -8,7 +7,7 @@ export const StyledCard = styled.li`
   border: 1px solid ${(props) => props.theme.lightGrey};
   border-bottom: 0;
   background-color: white;
-  transition: 0.2s;
+  transition: 0.1s;
   &:first-of-type {
     border-radius: 5px 5px 0 0;
   }
@@ -24,7 +23,7 @@ export const StyledCard = styled.li`
 
 export const StyledBasicInfo = styled.div`
   display: grid;
-  grid-template-columns: 75% repeat(2, 10%) 5%;
+  grid-template-columns: 65% repeat(2, 15%) 5%;
   align-items: center;
 `;
 
@@ -33,6 +32,8 @@ export const StyledExpandedInfo = styled.div`
   justify-content: space-around;
   font-size: ${(props) => props.theme.fontSizeLarge};
 `;
+
+export const StyledInfoBlock = styled.p``;
 
 export const StyledScores = styled.span`
   display: flex;
@@ -49,18 +50,24 @@ const Score = styled.span`
 
 // IMPROVE: Could do one calc here rather than two
 export const StyledTrustScore = styled(Score)<{ $value: number }>`
-  border: 2px solid ${(props) => calcColorBoundary(props.$value, 50, 75)};
-  color: ${(props) => calcColorBoundary(props.$value, 50, 75)};
+  border: 2px solid
+    ${(props) =>
+      props.$value > 50 ? props.theme.highColor : props.theme.lowColor};
+  color: ${(props) =>
+    props.$value > 50 ? props.theme.highColor : props.theme.lowColor};
 `;
 
 export const StyledRecentRevenue = styled(Score)<{ $value: number }>`
-  border: 2px solid ${(props) => calcColorBoundary(props.$value, 1000, 3000)};
-  color: ${(props) => calcColorBoundary(props.$value, 1000, 3000)};
+  border: 2px solid
+    ${(props) =>
+      props.$value > 5000 ? props.theme.highColor : props.theme.lowColor};
+  color: ${(props) =>
+    props.$value > 5000 ? props.theme.highColor : props.theme.lowColor};
 `;
 
 export const StyledCaretIcon = styled(CaretIcon)<{ $isExpanded: boolean }>`
   justify-self: right;
-  fill: ${(props) => props.theme.magenta};
+  fill: ${(props) => props.theme.blue};
   transition: 0.2s;
   ${(props) => props.$isExpanded && "transform: rotate(180deg)"}
 `;

@@ -15,8 +15,6 @@ type PaginationPropsType = {
   channelsLimit: number;
 };
 
-// TODO: add page limits
-// TODO: disable buttons when on that page
 export const Pagination = ({
   channels,
   channelsLimit,
@@ -64,6 +62,7 @@ export const Pagination = ({
 
   return (
     <StyledPagination>
+      {/* NOTE: could include table headers for newbies */}
       <StyledList>
         {channels &&
           getPaginatedData().map((channel, idx) => (

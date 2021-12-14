@@ -8,6 +8,7 @@ import {
   StyledBasicInfo,
   StyledExpandedInfo,
   StyledCaretIcon,
+  StyledInfoBlock,
 } from "./Card.styles";
 
 type CardPropsType = {
@@ -17,7 +18,7 @@ type CardPropsType = {
 export const Card = ({ channel }: CardPropsType) => {
   const [isExpanded, setIsExpanded] = useState(false);
   return (
-    // NOTE: not a button; bad a11y
+    // IMPROVE: not a button; bad a11y
     <StyledCard onClick={() => setIsExpanded(!isExpanded)}>
       <StyledBasicInfo>
         <Checkbox
@@ -35,9 +36,9 @@ export const Card = ({ channel }: CardPropsType) => {
       </StyledBasicInfo>
       {isExpanded && (
         <StyledExpandedInfo>
-          <p>Stats</p>
-          <p>Graphs</p>
-          <p>Information</p>
+          <StyledInfoBlock>Stats</StyledInfoBlock>
+          <StyledInfoBlock>Graphs</StyledInfoBlock>
+          <StyledInfoBlock>Information</StyledInfoBlock>
         </StyledExpandedInfo>
       )}
     </StyledCard>
