@@ -60,9 +60,9 @@ export const StyledTrustScore = styled(Score)<{ $value: number }>`
 export const StyledRecentRevenue = styled(Score)<{ $value: number }>`
   border: 2px solid
     ${(props) =>
-      props.$value > 5000 ? props.theme.highColor : props.theme.lowColor};
+      props.$value > 2500 ? props.theme.highColor : props.theme.lowColor};
   color: ${(props) =>
-    props.$value > 5000 ? props.theme.highColor : props.theme.lowColor};
+    props.$value > 2500 ? props.theme.highColor : props.theme.lowColor};
 `;
 
 export const StyledCaretIcon = styled(CaretIcon)<{ $isExpanded: boolean }>`

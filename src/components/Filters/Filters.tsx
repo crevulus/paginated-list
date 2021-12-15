@@ -15,17 +15,23 @@ import {
 export const Filters = () => {
   const [input, setInput] = useState("");
   const dropdownRef = useRef<HTMLSelectElement>(null);
-  const { data, setResults, setResultsLength, selected } =
+  const { data, setResults, setResultsLength, selected, setSelected, setPage } =
     useContext(GlobalContext);
+
+  const resetList = (filteredData: ChannelType[]) => {
+    setResults(filteredData);
+    setResultsLength(filteredData.length);
+    setSelected([]);
+    setPage(1);
+    setInput("");
+  };
 
   const handleSearch = (event: FormEvent) => {
     event.preventDefault();
     const filteredData = data.filter((channel) =>
-      channel.label.toLowerCase().includes(input)
+      channel.label.toLowerCase().includes(input.toLowerCase())
     );
-    setResults(filteredData);
-    setResultsLength(filteredData.length);
-    setInput("");
+    resetList(filteredData);
   };
 
   const handleDropdown = (event: any) => {
@@ -38,9 +44,7 @@ export const Filters = () => {
         (channel: ChannelType) => channel.country === event.target.value
       );
     }
-    setResults(filteredData);
-    setResultsLength(filteredData.length);
-    setInput("");
+    resetList(filteredData);
   };
 
   // NOTE: Added a much-needed reset button
@@ -63,7 +67,7 @@ export const Filters = () => {
           onChange={(event) => setInput(event.target.value.toLowerCase())}
         />
         <StyledSearchButton type="submit" $bgColor={theme.blue}>
-          Search
+          SEARCH
         </StyledSearchButton>
       </StyledSearchForm>
       <StyledDropdown ref={dropdownRef} onChange={handleDropdown}>
@@ -81,7 +85,7 @@ export const Filters = () => {
           {FilterCountryOptions.Three}
         </option>
       </StyledDropdown>
-      <StyledResetButton onClick={handleReset}>Reset Filters</StyledResetButton>
+      <StyledResetButton onClick={handleReset}>RESET FILTERS</StyledResetButton>
       {selected.length > 0 && (
         <StyledSelectedCount>{selected.length} selected</StyledSelectedCount>
       )}

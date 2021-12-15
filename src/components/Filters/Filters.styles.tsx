@@ -5,14 +5,14 @@ import { Button } from "../../styles/globalStyles";
 export const StyledFilters = styled.div`
   display: grid;
   grid-template-columns: 40% repeat(3, 1fr);
-  gap: 1rem;
+  gap: 1.5rem;
   align-items: center;
   justify-items: left;
 `;
 
 export const StyledSearchForm = styled.form`
   display: flex;
-  gap: 1rem;
+  gap: 0.5rem;
   width: 100%;
   height: 100%;
 `;

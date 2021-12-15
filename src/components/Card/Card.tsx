@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
+import GlobalContext from "../../data/GlobalContext";
 import { ChannelType } from "../../data/types";
 import Checkbox from "../Checkbox/Checkbox";
 import {
@@ -16,7 +17,13 @@ type CardPropsType = {
 };
 
 export const Card = ({ channel }: CardPropsType) => {
+  const { page } = useContext(GlobalContext);
   const [isExpanded, setIsExpanded] = useState(false);
+
+  useEffect(() => {
+    setIsExpanded(false);
+  }, [page]);
+
   return (
     // IMPROVE: not a button; bad a11y
     <StyledCard onClick={() => setIsExpanded(!isExpanded)}>

@@ -10,7 +10,7 @@ export const StyledList = styled.ul`
 export const StyledButtonsContainer = styled.div``;
 
 export const StyledNavigationButton = styled(Button)`
-  margin: 0 1rem;
+  margin: 0 1rem 1rem;
 `;
 
 // NOTE: Hardcoded width to match the widest button when dimesnions were fully dynamic.

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useContext } from "react";
+import React, { ChangeEvent, useContext, useState, useEffect } from "react";
 import GlobalContext from "../../data/GlobalContext";
 import {
   StyledCheckbox,
@@ -14,7 +14,8 @@ type CheckboxPropsType = {
 };
 
 const Checkbox = ({ label, country, id }: CheckboxPropsType) => {
-  const { selected, setSelected } = useContext(GlobalContext);
+  const { selected, setSelected, page } = useContext(GlobalContext);
+  const [checked, setChecked] = useState(false);
 
   const handleCheckboxChange = (event: ChangeEvent) => {
     event.stopPropagation(); // IMPROVE: Glitch; propagation not stopping successfully
@@ -27,7 +28,23 @@ const Checkbox = ({ label, country, id }: CheckboxPropsType) => {
       shallowArrayCopy.push(target);
       setSelected(shallowArrayCopy);
     }
+    setChecked(!checked);
   };
+
+  useEffect(() => {
+    if (!selected.length) {
+      setChecked(false);
+    }
+  }, [selected]);
+
+  useEffect(() => {
+    if (!selected.includes(id)) {
+      setChecked(false);
+    } else {
+      setChecked(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page, selected]);
 
   return (
     <StyledCheckboxContainer>
@@ -35,6 +52,7 @@ const Checkbox = ({ label, country, id }: CheckboxPropsType) => {
         type="checkbox"
         id={id}
         value={id}
+        checked={checked}
         onChange={handleCheckboxChange}
       />
       <StyledLogo />

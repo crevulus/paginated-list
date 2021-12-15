@@ -19,34 +19,34 @@ export const Pagination = ({
   channels,
   channelsLimit,
 }: PaginationPropsType) => {
-  const { dataLength, resultsLength } = useContext(GlobalContext);
+  const { dataLength, resultsLength, page, setPage } =
+    useContext(GlobalContext);
   const [pages, setPages] = useState(0);
-  const [currentPage, setCurrentPage] = useState(1);
   const [paginationGroup, setPaginationGroup] = useState<number[]>([]);
 
   function goToNextPage() {
-    setCurrentPage((page) => page + 1);
+    setPage((page) => page + 1);
   }
 
   function goToPreviousPage() {
-    setCurrentPage((page) => page - 1);
+    setPage((page) => page - 1);
   }
 
   function changePage(event: any) {
     const pageNumber = Number(event.target.textContent);
-    setCurrentPage(pageNumber);
+    setPage(pageNumber);
   }
 
   const getPaginatedData = () => {
-    const startIndex = currentPage * channelsLimit - channelsLimit;
+    const startIndex = page * channelsLimit - channelsLimit;
     const endIndex = startIndex + channelsLimit;
     return channels.slice(startIndex, endIndex);
   };
 
   useEffect(() => {
-    setPages(Math.ceil(dataLength / channelsLimit));
+    setPages(Math.ceil((resultsLength || dataLength) / channelsLimit));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dataLength]);
+  }, [dataLength, resultsLength]);
 
   useEffect(() => {
     getPaginationGroup();
@@ -72,7 +72,7 @@ export const Pagination = ({
       <div>
         <StyledNavigationButton
           onClick={goToPreviousPage}
-          disabled={currentPage === 1}
+          disabled={page === 1}
         >
           PREV
         </StyledNavigationButton>
@@ -82,7 +82,7 @@ export const Pagination = ({
             <StyledNumberButton
               key={index}
               onClick={changePage}
-              disabled={number === currentPage}
+              disabled={number === page}
               $bgColor={theme.blue}
             >
               {number}
@@ -90,7 +90,7 @@ export const Pagination = ({
           ))}
         <StyledNavigationButton
           onClick={goToNextPage}
-          disabled={currentPage === pages}
+          disabled={page === pages}
         >
           NEXT
         </StyledNavigationButton>

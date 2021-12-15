@@ -1,4 +1,3 @@
-// NOTE: Context technically wasn't needed here, but makes it easier for me.
 import { createContext, Dispatch, SetStateAction } from "react";
 import { ChannelType } from "./types";
 
@@ -11,6 +10,8 @@ type GlobalContextType = {
   setResultsLength: Dispatch<SetStateAction<number>>;
   selected: string[];
   setSelected: Dispatch<SetStateAction<string[]>>;
+  page: number;
+  setPage: Dispatch<SetStateAction<number>>;
 };
 
 // NOTE: Would split contexts in a real world application

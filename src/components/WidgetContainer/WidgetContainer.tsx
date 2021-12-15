@@ -14,6 +14,7 @@ const WidgetContainer = () => {
   const [selected, setSelected] = useState<string[]>([]);
   const [dataLength, setDataLength] = useState(0);
   const [resultsLength, setResultsLength] = useState(0);
+  const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -58,6 +59,8 @@ const WidgetContainer = () => {
         setResultsLength,
         selected,
         setSelected,
+        page,
+        setPage,
       }}
     >
       <StyledWidgetContainer>

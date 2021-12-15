@@ -7,7 +7,9 @@ export const StyledCheckboxContainer = styled.span`
   align-items: center;
 `;
 
-export const StyledCheckbox = styled.input``;
+export const StyledCheckbox = styled.input`
+  accent-color: ${(props) => props.theme.yellow};
+`;
 
 export const StyledLogo = styled(Logo)`
   width: 100px;
